@@ -1,0 +1,15 @@
+#!/bin/bash
+filenumber=$(ls | grep "linux-5" | wc -l)
+deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | head -$(($filenumber-1)))
+rm -r $deletefile  
+if [ $filenumber -eq 1 ] 
+then
+deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | head -$filenumber)
+rm -r $deletefile 
+fi
+if [ $filenumber -eq 0 ] 
+then
+filenumber=$(ls /var/cache/pacman/pkg | grep "linux-6" | wc -l)
+deletefile=$(ls /var/cache/pacman/pkg | grep "linux-6" | head -$(($filenumber-1)))
+rm -r $deletefile 
+fi
