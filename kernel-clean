@@ -1,15 +1,17 @@
 #!/bin/bash
-filenumber=$(ls | grep "linux-5" | wc -l)
-deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | head -$(($filenumber-1)))
-cd /var/cache/pacman/pkg && rm -r $deletefile  
-if [ $filenumber -eq 1 ] 
+numerofile=$(ls | grep "linux-5" | grep -E zst$ | wc -l)
+deletesig=$(ls /var/cache/pacman/pkg/ | grep -E sig$)
+deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | grep -E zst$ | head -$(($numerofile-1)))
+rm -r $deletefile  
+rm -r $deletesig
+if [ $numerofile -eq 1 ] 
 then
-deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | head -$filenumber)
-cd /var/cache/pacman/pkg && rm -r $deletefile 
-fi
-if [ $filename -eq 0 ] 
+exit 1 
+if [ $numerofile -eq 0 ] 
 then
-numerofile=$(ls /var/cache/pacman/pkg | grep "linux-6" | wc -l)
-deletefile=$(ls /var/cache/pacman/pkg | grep "linux-6" | head -$(($filename-1)))
-cd /var/cache/pacman/pkg && rm -r $deletefile 
+deletesig=$(ls /var/cache/pacman/pkg | grep "linux-6" | grep -E sig$)
+numerofile=$(ls /var/cache/pacman/pkg | grep "linux-6" | grep -E zst$ | wc -l)
+deletefile=$(ls /var/cache/pacman/pkg | grep "linux-6" | grep -E zst$ | head -$(($numerofile-1)))
+rm -r $deletefile 
+rm -r $deletesig
 fi
