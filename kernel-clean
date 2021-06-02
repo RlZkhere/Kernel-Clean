@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /var/cache/pacman/pkg
 numerofile=$(ls | grep "linux-5" | grep -E zst$ | wc -l)
 deletesig=$(ls /var/cache/pacman/pkg/ | grep -E sig$)
 deletefile=$(ls /var/cache/pacman/pkg/ | grep "linux-5" | grep -E zst$ | head -$(($numerofile-1)))
