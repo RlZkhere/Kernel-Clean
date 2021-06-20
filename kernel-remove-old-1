@@ -1,0 +1,8 @@
+#!/bin/bash
+maxnumber=9
+grepmaxnumber=$(sudo ls  | grep "linux-5" | grep -E zst$ | grep -o -P '.{0,3}linux-5.{0,6}' | grep -o '..$' | grep -Eo '[0-9]{1,4}' | sort -nr | head -1)
+if [ $grepmaxnumber -gt $maxnumber ]	
+then
+deletefile=$(ls linux* | grep -Ev "10.arch|11.arch|12.arch|13.arch|14.arch|15.arch|16.arch|17.arch|18.arch|19.arch|20.arch|21.arch|22.arch|23.arch")
+rm -r $deletefile
+fi
