@@ -1,0 +1,19 @@
+#!/bin/bash
+cd /var/cache/pacman/pkg
+numerofile=$(sudo ls /var/cache/pacman/pkg/| grep "linux-5" | grep -E zst$ | wc -l)
+deletesig=$(sudo ls /var/cache/pacman/pkg/ | grep -E sig$)
+deletefile=$(sudo ls /var/cache/pacman/pkg/ | grep "linux-5" | grep -E zst$ | head -$(($numerofile-1)))
+rm -r $deletefile  
+rm -r $deletesig
+if [ $numerofile -eq 1 ] 
+then
+exit 1 
+fi
+if [ $numerofile -eq 0 ] 
+then
+deletesig=$(sudo ls /var/cache/pacman/pkg | grep "linux-6" | grep -E sig$)
+numerofile=$(sudo ls /var/cache/pacman/pkg/| grep "linux-6" | grep -E zst$ | wc -l)
+deletefile=$(sudo ls /var/cache/pacman/pkg/ | grep "linux-6" | grep -E zst$ | head -$(($numerofile-1)))
+rm -r $deletefile 
+rm -r $deletesig
+fi
