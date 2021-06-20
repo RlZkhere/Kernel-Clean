@@ -1,0 +1,3 @@
+#!/bin/bash
+/bin/kernel-remove-old-1 2>>/dev/null
+/bin/kernel-remove-old-2 2>>/dev/null
